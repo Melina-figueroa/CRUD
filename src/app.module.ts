@@ -3,7 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CiudadModule } from './ciudad/ciudad.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ClaseModule } from './clase/clase.module';
+import { AsistenciaModule } from './asistencia/asistencia.module';
+import { ProfesoresModule } from './profesores/profesores.module';
+import { ClasesModule } from './clases/clases.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -17,7 +19,9 @@ import { ClaseModule } from './clase/clase.module';
     synchronize: true //solo se usa en modo desarrollador en produccion tenemos acceso a la bd de produccion
   }),
   CiudadModule,
-  ClaseModule
+  AsistenciaModule,
+  ProfesoresModule,
+  ClasesModule
 ],
   controllers: [AppController],
   providers: [AppService],

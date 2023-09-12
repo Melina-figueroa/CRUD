@@ -1,25 +1,25 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity({name:"ciudad"})
-export class Ciudad{
+@Entity({name:"profesores"})
+export class Profesor{
 
     @PrimaryGeneratedColumn()
     id:number;
 
     @Column()
-    nombre:string;
+    apellidoNombre:string;
 
     constructor(nombre:string){
-        this.nombre = nombre
+        this.apellidoNombre = nombre
     }
     public getId():number{
         return this.id;
     }
     public getNombre():string{
-        return this.nombre;
+        return this.apellidoNombre;
     }
     public setNombre(nombre:string){
-        this.nombre = nombre;
+        this.apellidoNombre = nombre;
     }
 }
