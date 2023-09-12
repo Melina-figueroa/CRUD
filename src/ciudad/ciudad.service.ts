@@ -14,7 +14,7 @@ export class CiudadService {
     private readonly ciudadRepository: Repository<Ciudad>,
   ) {}
 
-
+//Obtener todos los elementos
   async findAllRaw():Promise<Ciudad[]>{
     this.ciudades = [];
     let datos = await this.ciudadRepository.query("select * from ciudad");
@@ -27,6 +27,7 @@ export class CiudadService {
     return this.ciudades;
 }
 
+//Arreglo de objetos de ciudad, nos devuelve una promesa con objetos, metodo que nos provee repository
 async findAllOrm():Promise<Ciudad[]>{
     return await this.ciudadRepository.find();
 }
@@ -50,12 +51,12 @@ async findById(id :number) : Promise<Ciudad> {
 }
 
   //Servicio encargado de crear la ciudad
-  async create(createCiudadDto: CreateCiudadDto): Promise<boolean> {
+  async create(createCiudadDto: CreateCiudadDto): Promise<string> {
     try {
       let ciudad: Ciudad = await this.ciudadRepository.save(
         new Ciudad(createCiudadDto.nombre),
       );
-      if (ciudad) return true;
+      if (ciudad) return `Ciudad creada con exito`;
       else throw new Error('No se pudo crear la cuidad');
     } catch (error) {
       throw new HttpException(

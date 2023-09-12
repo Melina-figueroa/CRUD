@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CiudadModule } from './ciudad/ciudad.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ClaseModule } from './clase/clase.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -15,7 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     entities: [__dirname + '/**/**/**.entity{.ts,.js}'],
     synchronize: true //solo se usa en modo desarrollador en produccion tenemos acceso a la bd de produccion
   }),
-  CiudadModule
+  CiudadModule,
+  ClaseModule
 ],
   controllers: [AppController],
   providers: [AppService],
