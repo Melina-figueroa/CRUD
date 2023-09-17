@@ -2,8 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, FindOneOptions } from 'typeorm';
 import { Ciudad } from './entities/ciudad.entity';
-import { CreateCiudadDto } from './dto/create-ciudad.dto';
-import { UpdateCiudadDto } from './dto/update-ciudad.dto';
+import { CiudadDto } from './dto/ciudad.dto';
 
 @Injectable()
 export class CiudadService {
@@ -51,10 +50,10 @@ async findById(id :number) : Promise<Ciudad> {
 }
 
   //Servicio encargado de crear la ciudad
-  async create(createCiudadDto: CreateCiudadDto): Promise<string> {
+  async crear_ciudad(CiudadDto: CiudadDto): Promise<string> {
     try {
       let ciudad: Ciudad = await this.ciudadRepository.save(
-        new Ciudad(createCiudadDto.nombre),
+        new Ciudad(CiudadDto.nombre),
       );
       if (ciudad) return `Ciudad creada con exito`;
       else throw new Error('No se pudo crear la cuidad');
@@ -71,7 +70,7 @@ async findById(id :number) : Promise<Ciudad> {
 
   
   //Servicio encargado de actualizar la ciudad
-  async update(id: number, updateCiudadDto: UpdateCiudadDto): Promise<String> {
+  async actualizar_ciudad(id: number, ciudadDto: CiudadDto): Promise<String> {
     try {
       const criterio: FindOneOptions = { where: { id: id } };
       let ciudad: Ciudad = await this.ciudadRepository.findOne(criterio);
@@ -79,9 +78,9 @@ async findById(id :number) : Promise<Ciudad> {
         throw new Error('no se pudo encontrar la ciudad a modificar ');
       else {
         let ciudadVieja = ciudad.getNombre();
-        ciudad.setNombre(updateCiudadDto.nombre);
+        ciudad.setNombre(ciudadDto.nombre);
         ciudad = await this.ciudadRepository.save(ciudad);
-        return `OK - ${ciudadVieja} --> ${updateCiudadDto.nombre}`;
+        return `OK - ${ciudadVieja} --> ${ciudadDto.nombre}`;
       }
     } catch (error) {
       throw new HttpException(

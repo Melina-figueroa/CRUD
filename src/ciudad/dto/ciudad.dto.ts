@@ -1,3 +1,3 @@
-export class CreateCiudadDto {
+export class CiudadDto {
     readonly nombre : string;
 }
